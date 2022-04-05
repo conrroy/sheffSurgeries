@@ -21,13 +21,14 @@ model Doctor {
   id            Int       @id @default(autoincrement())
   crated_at     DateTime? @default(now())
   updated_at    DateTime? @updatedAt
-  full_name     String?
+  role          String    @default("Doctor")
+  name          String?
   qualification String?
   position      String?
-  doctor_email  String?
+  email         String?
   password      String?
-  doctor_office String?
-  doctor_phone  String?
+  office        String?
+  phone         String?
   bio           String?
 }
 
@@ -35,25 +36,24 @@ model Nurse {
   id             Int       @id @default(autoincrement())
   crated_at      DateTime? @default(now())
   updated_at     DateTime? @updatedAt
-  nurse_name     String?
+  role           String    @default("Nurse")
+  name           String?
   qualifications String?
-  nurse_email    String?
-  nurse_office   String?
-  nurse_phone    String?
+  email          String?
+  office         String?
+  phone          String?
 }
 
 model Patient {
   id         Int       @id @default(autoincrement())
   crated_at  DateTime? @default(now())
   updated_at DateTime? @updatedAt
-  username   String    @unique
   name       String?
   address    String?
   residence  String?
   dob        DateTime?
   phone      String?
-  email      String?
-  password   String
+  role       String    @default("Patient")
 }
 
 model Prescription {
@@ -69,20 +69,22 @@ model Prescription {
 }
 
 model Receptionist {
-  id             Int       @id @default(autoincrement())
-  crated_at      DateTime? @default(now())
-  updated_at     DateTime? @updatedAt
-  recep_name     String?
-  recep_email    String?
-  recep_username String?
-  recep_password String?
-  recep_phone    String?
+  id         Int       @id @default(autoincrement())
+  crated_at  DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  role       String    @default("Receptionist")
+  name       String?
+  email      String?
+  username   String    @unique
+  password   String
+  phone      String?
 }
 
 model Surgery {
   id                 Int       @id @default(autoincrement())
   crated_at          DateTime? @default(now())
   updated_at         DateTime? @updatedAt
+  role               String    @default("Surgery")
   name               String?
   address            String?
   postcode           String?
