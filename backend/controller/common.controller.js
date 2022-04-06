@@ -5,8 +5,14 @@ import config from "../config/default.config.js";
 export default (route) => {
   // login
   route.post('/login', async (ctx) => {
-    const { remember, ...body } = ctx.request.body
-    const user = await DB.Receptionist.findFirst({
+    const { role, ...body } = ctx.request.body
+    let Model
+    if (role == "receptionist") {
+      Model = DB.Receptionist
+    } else if (role == "doctor") {
+      Model = DB.Doctor
+    }
+    const user = await Model.findFirst({
       where: body,
     })
 
@@ -21,15 +27,27 @@ export default (route) => {
   })
   // register
   route.post('/register', async (ctx) => {
-    const body = ctx.request.body
+    const { role, ...body } = ctx.request.body
+    let Model
+    if (role === "Nurse") {
+      Model = DB.nurse
+    } else if (role === "Doctor") {
+      Model = DB.doctor
+    } else if (role == "Patient") {
+      Model = DB.patient
+    } else {
+      Model = DB.receptionist
+    }
     try {
-      console.log(body);
-      const res = await DB.Receptionist.create({
+      console.log(body, '-----------');
+      const res = await Model.create({
         data: body
       })
       delete res.password
       const token = JWT.sign(res, config.jwt.secret, { expiresIn: '2d' })
-      ctx.set('Authorization', `Bearer ${token}`)
+      if (!role) {
+        ctx.set('Authorization', `Bearer ${token}`)
+      }
       ctx.body = res
     } catch (error) {
       console.log(error);
@@ -45,4 +63,47 @@ export default (route) => {
       ctx.throw(401)
     }
   })
+  route.post('/add-user', (ctx) => {
+    const { } = ctx.request.body
+
+  })
+
+  route.post('/queryPatient', async (ctx) => {
+    const {id} = ctx.request.body
+    let Model = DB.patient
+
+    let res = await Model.findFirst({
+      id:id
+    })
+    ctx.body = res
+  })
+
+  route.post('/queryPrescriptions', async (ctx) => {
+    const {id} = ctx.request.body
+    let Model = DB.prescription
+    let res = await Model.findFirst({
+      where:id
+    })
+    ctx.body = res
+  })
+
+  route.post('/createPrescriptions', async (ctx) => {
+    const {...body} = ctx.request.body
+    let Model = DB.prescription
+    const res = await Model.create({
+      data:body
+    })
+
+    ctx.body = res
+  })
+
+  // route.post('/createPrescriptions', async (ctx) => {
+  //   const {...body} = ctx.request.body
+  //   let Model = DB.prescription
+  //   const res = await Model.create({
+  //     data:body
+  //   })
+
+  //   ctx.body = res
+  // })
 }
