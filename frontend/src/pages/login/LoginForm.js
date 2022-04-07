@@ -8,7 +8,7 @@ import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../components/hook-form';
 import { LoginApi } from '../../api/common';
 import useBoolean from '../../hooks/useBoolean';
@@ -27,7 +27,6 @@ export default function LoginForm() {
   const defaultValues = {
     username: 'user1',
     password: '123456',
-    remember: true,
   };
 
   const methods = useForm({
@@ -42,6 +41,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data) => {
     setLoading.on()
+    data.role = "receptionist"
     const id = toast.loading("Please wait...",)
     LoginApi(data).then(res => {
       RootStore.loginSuccess(res)
@@ -66,7 +66,10 @@ export default function LoginForm() {
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <RHFCheckbox name="remember" label="Remember me" />
+        {/* <RHFCheckbox name="remember" label="Remember me" /> */}
+        <NavLink to="/doctor-login" >
+          Doctor Login
+        </NavLink>
       </Stack>
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={loading}>

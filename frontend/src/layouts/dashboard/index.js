@@ -61,9 +61,7 @@ const DashboardLayout = function () {
           }}
         >
           <DashboardHeader isCollapse={isCollapse} onOpenSidebar={() => setOpen(true)} />
-
           <NavbarVertical isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-
           <MainStyle collapseClick={collapseClick}>
             <Outlet />
           </MainStyle>

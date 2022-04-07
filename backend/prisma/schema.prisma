@@ -57,15 +57,15 @@ model Patient {
 }
 
 model Prescription {
-  id              Int       @id @default(autoincrement())
-  crated_at       DateTime? @default(now())
-  updated_at      DateTime? @updatedAt
-  pharmacy_name   String?
-  prescrip_number String?
-  medicine        String?
-  total_cost      Decimal?  @db.Decimal(10, 2)
-  date_issued     DateTime?
-  paying          String?
+  id         Int       @id @default(autoincrement())
+  crated_at  DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  name       String?
+  number     String?
+  medicine   String?
+  total      Decimal?  @db.Decimal(10, 2)
+  date       DateTime?
+  paying     String?
 }
 
 model Receptionist {

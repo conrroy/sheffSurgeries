@@ -69,29 +69,29 @@ export default (route) => {
   })
 
   route.post('/queryPatient', async (ctx) => {
-    const {id} = ctx.request.body
+    const { id } = ctx.request.body
     let Model = DB.patient
 
     let res = await Model.findFirst({
-      id:id
+      id: id
     })
     ctx.body = res
   })
 
   route.post('/queryPrescriptions', async (ctx) => {
-    const {id} = ctx.request.body
+    const body = ctx.request.body
     let Model = DB.prescription
-    let res = await Model.findFirst({
-      where:id
+    let res = await Model.findMany({
+      where: body
     })
     ctx.body = res
   })
 
   route.post('/createPrescriptions', async (ctx) => {
-    const {...body} = ctx.request.body
+    const { ...body } = ctx.request.body
     let Model = DB.prescription
     const res = await Model.create({
-      data:body
+      data: body
     })
 
     ctx.body = res

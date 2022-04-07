@@ -40,6 +40,7 @@
     "@emotion/styled": "^11.6.0",
     "@hookform/resolvers": "^2.8.8",
     "@iconify/react": "^3.1.0",
+    "@mui/icons-material": "^5.6.0",
     "@mui/lab": "^5.0.0-alpha.75",
     "@mui/material": "^5.2.4",
     "@mui/x-data-grid": "^5.7.0",

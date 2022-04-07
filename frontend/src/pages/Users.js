@@ -10,10 +10,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { DatePicker, LoadingButton, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { toast } from 'react-toastify';
 import useBoolean from '../hooks/useBoolean';
 // components
 import Page from '../components/Page';
 import { RHFTextField, FormProvider } from '../components/hook-form';
+import { RegisterApi } from '../api/common';
 // ----------------------------------------------------------------------
 
 const columns = [
@@ -68,18 +70,18 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const defaultValues = {
-  username: "",
-  name: "",
-  email: '',
-  password: '',
-  phone: "",
-  address: "",
-  residence: "",
-  dob: "",
-  role: "Patient",
-  office: "",
-  qualifications: "",
-  bio: ''
+  username: undefined,
+  name: undefined,
+  email: undefined,
+  password: undefined,
+  phone: undefined,
+  address: undefined,
+  residence: undefined,
+  dob: undefined,
+  role: "Doctor",
+  office: undefined,
+  qualifications: undefined,
+  bio: undefined,
 };
 
 
@@ -88,7 +90,7 @@ export default function PageOne() {
     resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
-  const [role, setRole] = useState()
+  const [role, setRole] = useState("Doctor")
   const [dob, setDob] = useState()
   const [loading, setLoading] = useBoolean()
   const onSubmit = async (data) => {
@@ -97,7 +99,16 @@ export default function PageOne() {
     data.role = role
   };
   const submit = () => {
-    console.log(123);
+    const vlas = methods.getValues()
+    methods.trigger().then(vilidate => {
+      if (vilidate) {
+        RegisterApi(vlas).then(res => {
+          toast.success('Success')
+          methods.reset()
+          setShowModal.off()
+        })
+      }
+    })
   }
   const [showModal, setShowModal] = useBoolean(false)
   useEffect(() => {
@@ -109,7 +120,7 @@ export default function PageOne() {
     return () => subscription.unsubscribe();
   }, [methods.watch]);
   return (
-    <Page title="Page One" style={{ height: "100%" }}>
+    <Page title="Users">
       <Box sx={{
         my: 2,
         display: "flex",
@@ -129,7 +140,7 @@ export default function PageOne() {
       <Dialog open={showModal} onClose={setShowModal.off}>
         <DialogTitle>Add User</DialogTitle>
         <DialogContent sx={{ width: 500 }}>
-          <FormProvider methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
+          <FormProvider methods={methods}>
             <Stack spacing={2} sx={{
               py: 3
             }} >
@@ -137,6 +148,7 @@ export default function PageOne() {
                 name="role"
                 select
                 label="Role"
+                value={role}
               >
                 <MenuItem value="Nurse">
                   Nurse
@@ -159,16 +171,17 @@ export default function PageOne() {
                       label="Password"
                     />
                   </Stack>
+                  <RHFTextField name="email" label="Email address" />
                 </> : null
 
               }
               <RHFTextField name="name" label="Name" />
               <RHFTextField name="phone" label="Phone" />
+              {role === "Nurse" && <>
+                <RHFTextField name="email" label="Email address" /><RHFTextField name="qualifications" label="Qualifications" /></>}
               {
                 role === "Nurse" || role === "Doctor" ? <>
-                  <RHFTextField name="qualifications" label="Qualifications" />
                   <RHFTextField name="office" label="Office" />
-                  <RHFTextField name="email" label="Email address" />
                 </> : null
               }
               {

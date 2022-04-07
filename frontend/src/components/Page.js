@@ -12,7 +12,9 @@ const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
       <title>{`${title}`}</title>
       {meta}
     </Helmet>
-    <Box ref={ref} {...other}>
+    <Box ref={ref} {...other} sx={{
+      height: "100%",
+    }}>
       {children}
     </Box>
   </>
