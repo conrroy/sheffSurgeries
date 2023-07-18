@@ -2,7 +2,7 @@ package com.czhang
 
 class Doctor {
     String doctorName
-    String qualification
+    String qualifications
     String position
     String doctorEmail
     String password

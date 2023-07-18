@@ -12,6 +12,6 @@ class Receptionist {
         recepEmail email: true
         recepUsername blank: false
         recepPassword blank: false
-//        recepPhone
+        recepPhone shared: "phoneNumber"
     }
 }

@@ -8,6 +8,7 @@ class Patient {
     String patientID
     Date dateRegistered
     String patientPhone
+    String patientEmail // Additional attribute
 
     static constraints = {
         patientName blank: false
@@ -17,5 +18,6 @@ class Patient {
         patientID blank: false
         dateRegistered blank: false
         patientPhone shared: "phoneNumber"
+        patientEmail email: true
     }
 }
