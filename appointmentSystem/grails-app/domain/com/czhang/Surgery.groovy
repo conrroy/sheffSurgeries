@@ -9,10 +9,12 @@ class Surgery {
     String openingTime
     Boolean registeringNewPatients // indicate whether the surgery accepts new patient registration
 
+    static hasMany = [doctors: Doctor, nurses: Nurse, receptionists: Receptionist, patients: Patient, appointments: Appointment]
+
     static constraints = {
         name blank: false, unique: true
         postcode blank: false
-        telephone  shared: "phoneNumber"
+        telephone shared: "phoneNumber"
         numberOfPatients blank: false, min: 0
 //        description nullable: true
         openingTime blank: false //TODO: matches: regex

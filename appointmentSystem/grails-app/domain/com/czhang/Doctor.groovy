@@ -10,6 +10,8 @@ class Doctor {
     String doctorPhone
     String bio   // Biography of doctor
 
+    static hasMany = [prescriptions: Prescription, appointments: Appointment]
+
     static constraints = {
         doctorName blank: false
         qualification blank: false
