@@ -10,6 +10,8 @@ class Patient {
     String patientPhone
     String patientEmail // Additional attribute
 
+    static  hasMany = [precsciptions: Prescription, appointments: Appointment]
+
     static constraints = {
         patientName blank: false
 //        patientAddress

@@ -7,6 +7,8 @@ class Nurse {
     String nurseOffice
     String nursePhone
 
+    static hasMany = [appointments: Appointment]
+
     static constraints = {
         nurseName blank: false
 //        qualifications
