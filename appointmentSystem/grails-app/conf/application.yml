@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: appointmentsystem
+        defaultPackage: com.czhang
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
