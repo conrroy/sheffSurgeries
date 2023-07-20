@@ -53,6 +53,7 @@ class BootStrap {
                 doctorPhone: "12332211",
                 bio: "",  // Biography of doctor
                 surgery: surgery2
+
         ).save(failOnError: true)
 
         def nurse1 = new Nurse(
@@ -110,7 +111,9 @@ class BootStrap {
                 recepUsername: "recep2",
                 recepPassword: "recep2",
                 recepEmail: "recep2@example.com",
+
                 surgery: surgery2
+
         ).save(failOnError: true)
 
         def appointment1 = new Appointment(
@@ -119,7 +122,7 @@ class BootStrap {
                 roomNumber: "Room1",
                 surgery: surgery1,
                 patient: patient1,
-                doctor: doctor1
+                doctor: doctor1,
         ).save(failOnError: true)
 
         def appointment2 = new Appointment(
