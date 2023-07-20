@@ -11,7 +11,7 @@ import com.czhang.Doctor
 class BootStrap {
 
     def init = { servletContext ->
-        def surgery1 = new Surgery(
+ /*       def surgery1 = new Surgery(
                 name: 'Surgery1',
                 postcode: 'PostCOde1',
                 telephone: '00112233',
@@ -159,6 +159,8 @@ class BootStrap {
                 patient: patient2,
                 doctor: doctor2
         ).save(failOnError: true)
+
+  */
     }
     def destroy = {
     }
