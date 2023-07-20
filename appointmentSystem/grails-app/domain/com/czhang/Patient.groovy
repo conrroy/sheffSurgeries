@@ -16,10 +16,10 @@ class Patient {
         patientName blank: false
 //        patientAddress
 //        patientResidence
-        patientDob blank: false, max: new Date()
+        patientDob blank: false
         patientID blank: false
         dateRegistered blank: false
-        patientPhone shared: "phoneNumber"
+        patientPhone shared: "phoneNumber", nullable: true
         patientEmail email: true
     }
 }

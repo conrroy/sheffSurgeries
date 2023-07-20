@@ -8,6 +8,7 @@ class Nurse {
     String nursePhone
 
     static hasMany = [appointments: Appointment]
+    Surgery surgery
 
     static constraints = {
         nurseName blank: false
@@ -15,5 +16,7 @@ class Nurse {
         nurseEmail email: true
 //        nurseOffice
         nursePhone shared: "phoneNumber"
+        appointments nullable: true
+        surgery nullable: true
     }
 }

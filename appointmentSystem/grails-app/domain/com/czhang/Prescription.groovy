@@ -5,7 +5,7 @@ class Prescription {
     String medicine
     String daysSuply
     String totalCost
-    String usage // Additional attribute
+    String medUsage // Additional attribute
     Date dateIssued
     Boolean patientPaying // To indicate whether patient will pay for the medicine
 
@@ -14,8 +14,8 @@ class Prescription {
     static constraints = {
         prescriptionNumber blank: false
         dateIssued blank: false
+        medicine nullable: true
         patientPaying inList: [true, false]
-        doctor nullable: false, blank: false
-        patient nullable: false, blank: false
+        medUsage size: 5..1000, nullable: true
     }
 }

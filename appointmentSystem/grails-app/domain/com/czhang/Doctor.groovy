@@ -11,15 +11,19 @@ class Doctor {
     String bio   // Biography of doctor
 
     static hasMany = [prescriptions: Prescription, appointments: Appointment]
+    Surgery surgery
 
     static constraints = {
         doctorName blank: false
-        qualification blank: false
-        position blank: false
-        doctorEmail blank: false, email: true
+        qualifications blank: true
+        position blank: true
+        doctorEmail blank: false, email: true, unique: true
         password blank: false
 //        doctorOffice
         doctorPhone shared: "phoneNumber"
-//        bio
+        bio blank: true, nullable: true
+        prescriptions nullable: true
+        appointments nullable: true
+        surgery nullable: true
     }
 }
