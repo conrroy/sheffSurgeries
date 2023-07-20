@@ -100,13 +100,13 @@ class DoctorController {
     def login(){}
 
     def validate() {
-        def user = Doctor.findByUsername(params.username)
+        def user = Doctor.findByDoctorEmail(params.email)
         if (user && user.password == params.password){
             session.user = user
             render view:'home'
 
         }else {
-            flash.message = "Invalid username and password."
+            flash.message = "Invalid email and password."
             render view:'login'
         }
     }

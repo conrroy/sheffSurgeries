@@ -39,7 +39,7 @@
 
                     <div class="second m-5">
                         <button type="button" class="btn btn-success btn-block btn-lg">
-                            Doctor
+                            <g:link class="text-light" controller="doctor" action="login">Doctor</g:link>
                         </button>
                     </div>
                 </div>
