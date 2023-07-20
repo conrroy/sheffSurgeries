@@ -12,12 +12,16 @@ class Surgery {
     static hasMany = [doctors: Doctor, nurses: Nurse, receptionists: Receptionist, patients: Patient, appointments: Appointment]
 
     static constraints = {
-        name blank: false, unique: true
+        name blank: false
         postcode blank: false
         telephone shared: "phoneNumber"
         numberOfPatients blank: false, min: 0
-//        description nullable: true
+        description nullable: true
         openingTime blank: false //TODO: matches: regex
         registeringNewPatients inList: [true, false]
+    }
+
+    String toString(){
+        return name
     }
 }

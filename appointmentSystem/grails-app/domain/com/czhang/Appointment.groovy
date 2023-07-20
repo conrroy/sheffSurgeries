@@ -7,17 +7,21 @@ class Appointment {
     Date appDateTime
     Integer appDuration // duration in mins
     String roomNumber
-    static hasOne = [surgery:Surgery, patient: Patient]
-    Doctor doctor
+    static belongsTo = [surgery:Surgery, patient: Patient]
+    static hasOne = [doctor:Doctor]
     static hasMany =[nurse:Nurse]
 
     static constraints = {
-        appDateTime blank: false, min: new Date()
+        appDateTime blank: false
         appDuration blank: false, min: 0, max:480
         roomNumber blank: false
         doctor nullable: true // optional
         nurse minSize: 0 // one appointment requires zero or more nurses
         surgery nullable: false
         patient nullable: false
+    }
+
+    String toString(){
+        return patient.toString() + "'s " + "Appointment"
     }
 }
