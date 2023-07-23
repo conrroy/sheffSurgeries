@@ -24,8 +24,8 @@
 ### Appointment System
 
 - Receptionist
-  - username: recept1
-  - password: recept1
+  - username: recep1
+  - password: recep1
 - Doctor
   - doctor1@example.com
   - pd_dc1
