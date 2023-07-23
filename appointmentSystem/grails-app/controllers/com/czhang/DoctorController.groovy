@@ -103,7 +103,7 @@ class DoctorController {
         def user = Doctor.findByDoctorEmail(params.email)
         if (user && user.password == params.password){
             session.user = user
-            render view:'home'
+            redirect(uri:'/')
 
         }else {
             flash.message = "Invalid email and password."

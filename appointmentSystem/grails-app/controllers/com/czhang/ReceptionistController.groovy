@@ -105,7 +105,7 @@ class ReceptionistController {
         def user = Receptionist.findByRecepUsername(params.username)
         if (user && user.recepPassword == params.password){
             session.user = user
-            render view:'home'
+            redirect(uri:'/')
 
         }else {
             flash.message = "Invalid username and password."
