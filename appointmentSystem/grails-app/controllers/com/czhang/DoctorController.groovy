@@ -103,6 +103,7 @@ class DoctorController {
         def user = Doctor.findByDoctorEmail(params.email)
         if (user && user.password == params.password){
             session.user = user
+            session.user_type = Doctor.toString()
             redirect(uri:'/')
 
         }else {
@@ -112,7 +113,7 @@ class DoctorController {
     }
 
     def logout = {
-        session.user = null
+        session.invalidate()
         redirect(uri:'/')
     }
 }

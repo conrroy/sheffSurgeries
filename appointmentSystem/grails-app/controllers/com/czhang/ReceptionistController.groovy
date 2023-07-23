@@ -105,6 +105,7 @@ class ReceptionistController {
         def user = Receptionist.findByRecepUsername(params.username)
         if (user && user.recepPassword == params.password){
             session.user = user
+            session.user_type = Receptionist.toString()
             redirect(uri:'/')
 
         }else {
@@ -114,7 +115,7 @@ class ReceptionistController {
     }
 
     def logout = {
-        session.user = null
+        session.invalidate()
         redirect(uri:'/')
     }
 }
